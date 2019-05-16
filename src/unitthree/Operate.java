@@ -11,6 +11,7 @@ import java.util.Scanner;
 public class Operate {
 
     private static List<Ticket> lot = new ArrayList<>();
+    public static List<TicketLog> ticketLog = new ArrayList<>();
     /**
      * @param args the command line arguments
      */
