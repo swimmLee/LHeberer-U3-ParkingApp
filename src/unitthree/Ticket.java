@@ -4,7 +4,7 @@ package unitthree;
 import java.time.Duration;
 import java.time.LocalTime;
 
-class Ticket {
+public class Ticket {
     private int ticketNumber;
     public LocalTime hourlyIn;
     private LocalTime hourlyOut;
