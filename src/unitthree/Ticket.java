@@ -9,6 +9,12 @@ public class Ticket {
     public LocalTime hourlyIn;
     private LocalTime hourlyOut;
     private String rate;
+    private double amount;
+
+    public double getAmount() {return amount;}
+    public void setAmount(double amount) {
+        this.amount = amount;
+    }
     public Clock timeIn;
     public Clock timeOut;
     

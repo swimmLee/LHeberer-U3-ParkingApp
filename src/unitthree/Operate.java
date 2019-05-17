@@ -1,25 +1,31 @@
 
 package unitthree;
 
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import static java.lang.Integer.parseInt;
 import java.time.Duration;
 import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
+import unitthree.fileIO.ReadInput;
+import unitthree.fileIO.WriteOutput;
 
 public class Operate {
 
     private static List<Ticket> lot = new ArrayList<>();
     public static List<TicketLog> ticketLog = new ArrayList<>();
+    public static List<TicketLog> todayLog = new ArrayList<>();
+    String fileName = "lotArchive.csv";
     /**
      * @param args the command line arguments
      */
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException, FileNotFoundException, ClassNotFoundException {
         Operate lot = new Operate();
     }
     
-    public Operate(){
+    public Operate() throws IOException, FileNotFoundException, ClassNotFoundException{
         Scanner kb = new Scanner(System.in);
         int ans;
         TicketFactory ticketFactory = new TicketFactory();
@@ -60,7 +66,27 @@ public class Operate {
                 Duration time = inTicket.timeParked();
                 System.out.println("Time parked " + time + "\n");
             }
+            int tl1 = inTicket.getTicketNumber();
+            String tl2 = inTicket.getRate();
+            double tl3 = inTicket.getAmount();
+            
+            TicketLog tl = new TicketLog(tl1, tl2, tl3);
+            todayLog.add(tl);
         }
+        WriteOutput wo = new WriteOutput();
+        wo.writeObjects(fileName, (List<TicketLog>) todayLog);
+        
+        
+
+        List<Ticket> todayLogTest = ReadInput.ReadObjectFile(fileName);
+        
+        for(int i=0; i < todayLogTest.size(); i++){
+            Ticket ticket = todayLogTest.get(i);
+            System.out.println("Ticket Number " + ticket.getTicketNumber()
+                    + ", Ticket type of Rate " + ticket.getRate()
+                    + ", Ticket Amount " + ticket.getAmount());
+        }
+        
     }
     
     public void showParkedCars(){
